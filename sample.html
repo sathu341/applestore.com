@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery.js"></script>
+</head>
+<body>
+    <h3>Ajax</h3>
+     <div id="userlist"></div>
+     <button id="listdata">
+        View User
+     </button>
+    <script>
+        $(document).ready(function(){
+            $("#listdata").click(function(){
+                  $.ajax({
+                url:'https://jsonplaceholder.typicode.com/users',
+                type:'GET',
+                success:function(response){
+                  let output="<ul>";
+                    response.forEach(function(user){
+                     output+=`<li>${user.name}(${user.email})`;
+                    });
+                    output+="</ul>";
+                    $("#userlist").html(output)
+                },
+                error:function(error){
+                   $("#userlist").html("Error in Loading Data....")
+                }
+
+            })
+            })
+            
+        })
+    </script>
+</body>
+</html>

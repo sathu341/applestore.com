@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fetch API Data</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h2>User List</h2>
+    <div id="userList"></div>
+
+    <script>
+        // jQuery AJAX Call
+        $(document).ready(function() {
+            $.ajax({
+                url: "https://jsonplaceholder.typicode.com/users",
+                type: "GET",
+                success: function(response) {
+                    // Display each user inside the div
+                    let output = "<ul>";
+                    response.forEach(function(user) {
+                        output += `<li>${user.name} (${user.email})</li>`;
+                    });
+                    output += "</ul>";
+                    $('#userList').html(output);
+                },
+                error: function(error) {
+                    $('#userList').html("Error loading data.");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
